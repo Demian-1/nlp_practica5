@@ -11,7 +11,7 @@ from scipy.sparse import hstack
 def load_sel():
 	#~ global lexicon_sel
 	lexicon_sel = {}
-	input_file = open('../Lexicons/SEL_full.txt', 'r')
+	input_file = open('SEL_full.txt', 'r')
 	for line in input_file:
 		#Las líneas del lexicon tienen el siguiente formato:
 		#abundancia	0	0	50	50	0.83	Alegría
@@ -98,6 +98,7 @@ if __name__=='__main__':
 	cadenas. append(cadena2)
 	
 	polaridad = getSELFeatures(cadenas, lexicon_sel)
+	print("POLARIDAD")
 	print (polaridad)
 	
 	# lo de sobrecargar metodos
@@ -111,13 +112,16 @@ if __name__=='__main__':
 	polaridad_cadena_1_pos = np.array([polaridad[0]['acumuladopositivo']])
 	polaridad_cadena_1_neg = np.array([polaridad[0]['acumuladonegative']])
 	polaridad_cadena_1 = np.concatenate((polaridad_cadena_1_pos, polaridad_cadena_1_neg), axis=0)
+	print("POLARIDAD CADENA 1 : ")
 	print (polaridad_cadena_1)
 	polaridad_cadena_2_pos = np.array([polaridad[1]['acumuladopositivo']])
 	polaridad_cadena_2_neg = np.array([polaridad[1]['acumuladonegative']])
 	polaridad_cadena_2 = np.concatenate((polaridad_cadena_2_pos, polaridad_cadena_2_neg), axis=0)
+	print("POLARIDAD CADENA 2 :")
 	print (polaridad_cadena_2)
 	polaridad_cadenas = np.stack((polaridad_cadena_1, polaridad_cadena_2))
 	print ('Polaridad')
+	print("POLARIDAD CADENAS: ")
 	print (polaridad_cadenas)
 	vectorizado_con_polaridad = hstack([X,polaridad_cadenas]).toarray()
 	print ('Vectorizado + polaridad')
